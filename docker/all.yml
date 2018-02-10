@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  nginx:
+    image: yosmy/nginx
+    container_name: php_packages_nginx
+    volumes:
+      - ../build/output:/usr/share/nginx/html
+    networks:
+      - proxy
+      - php_packages
+    environment:
+      - VIRTUAL_HOST=php.yosmy.com
+      - LETSENCRYPT_HOST=php.yosmy.com
+      - LETSENCRYPT_EMAIL=contact@yosmy.com
+    restart: always
+
+networks:
+  proxy:
+    external: true
+  php_packages:
+    external: true
